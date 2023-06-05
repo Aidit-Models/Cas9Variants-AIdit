@@ -51,7 +51,7 @@ def emb_number(input):
         data.append(output_data)
     return np.array(data)
 
-# creat input 
+# create input 
 def creat_data_for_1d_input(token_type,dataframe):
     if token_type == 'embedding':
         dataprocess = emb_number
@@ -72,7 +72,7 @@ def to_array(input):
     """
     return np.array(input.to_list())
 
-# creat label 
+# create label 
 def creat_label (dataframe):
     return to_array(dataframe['off']).reshape(-1,1)
 
