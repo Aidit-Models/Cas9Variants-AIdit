@@ -8,11 +8,11 @@ import os
 
 
 
-# 检查输入是否为路径
+# check path 
 def is_valid_path(path):
     return os.path.isfile(path) or os.path.isdir(path)
 
-# 生成路径文件
+# create folder 
 def mkdir(path):
     path = path.strip()
     path = path.rstrip("\\")
@@ -20,42 +20,42 @@ def mkdir(path):
     if not isExists:
         os.makedirs(path)
 
-# 定义预测使用的函数
+# main function
 def pred():
     parser = argparse.ArgumentParser()
-    ## 输入的细胞系
+    ## cell line 
     parser.add_argument(
         "--cellline",
         type=str,
         help="choose K562 cellline or Jurakt cellline ",
     )
-    ## 输入的文件或者序列信息
+    ## input file
     parser.add_argument(
         "--input",
         type=str,
         help="path of data for training and testing or just sequence",
     )
-    ## 输入模型
+    ## choose model
     parser.add_argument(
         "--model",
         type=str,
         help="choose the model you would like to use ( lgb, ridge,xgb and  mlp)",
     )
-    ## 输入模型保存的库
+    ## off-target model library
     parser.add_argument(
         "--model_library",
         type=str,
         default='.',
         help="model_library path",
     )
-    ## 输入on-target 模型库
+    ## on-target model library 
     parser.add_argument(
         "--on_target_model_path",
         type=str,
         default='../ON-target',
         help="path of on target library ",
     )
-    ## 输出结果路径
+    ## output path 
     parser.add_argument(
         "--output_dir",
         type=str,
@@ -64,25 +64,25 @@ def pred():
     )
     args = parser.parse_args()
 
-    ## 检查是否是我们需要的路径
+    ## check file type
     if is_valid_path(args.input):
         if 'txt' in args.input:
             data = pd.read_table(args.input,header=None)
             data.columns = ['wt_63_seq','ot_63_seq']
         else:
-            print('请输入txt格式')
+            print('need txt file')
     else:
-        print('请输入txt格式')
+        print('need txt file')
         
-    ##检查输出路径，如果不存在并创建
+    ## create folder 
     mkdir(args.output_dir)
     
-    ## 准备数据
+    ## prepare data
     data = off_target_process(data,args.on_target_model_path,args.cellline)
     input_for_mlp = creat_off_input_for_mlp(data)
     input_for_ml = creat_off_input_for_ml(data)
 
-    ##选择模型 进入不同的处理流程
+    ##choose model
     if 'ridge' in args.model or 'xgb' in args.model or 'linear' in args.model or "lgb" in args.model:
         model_selection = f'{args.model_library}/{args.cellline}_best_model/{args.model}_best.sav'
         ml = joblib.load(model_selection)
