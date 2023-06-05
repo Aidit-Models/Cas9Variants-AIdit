@@ -101,7 +101,7 @@ def creat_data_for_1d_input(token_type,dataframe):
     input = to_array(dataframe['input'])
     return input.reshape(out_shape)
 
-# creat input 
+# create input 
 def creat_data_for_2d_input(token_type,dataframe):
     if token_type == 'embedding':
         dataprocess = emb_number
