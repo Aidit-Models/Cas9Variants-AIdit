@@ -62,7 +62,7 @@ def pred():
     else:
         data = find_all(args.input,file=False)
 
-    ##creat folder 
+    ##create folder 
     mkdir(args.output_dir)
     ## prepare data
     data = pd.DataFrame(data)
