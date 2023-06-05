@@ -24,8 +24,8 @@ def focal_loss(y_true,y_pred):
     return loss
 
 
-# metric which used during training 
-"""check spearman and pearson during trainning """
+# metric which will be used during training 
+"""check spearman and pearson during training """
 def get_spearmanr(y_true, y_pred):  
     return tf.py_function(spearmanr, [y_true, y_pred], Tout = tf.float32)
     
