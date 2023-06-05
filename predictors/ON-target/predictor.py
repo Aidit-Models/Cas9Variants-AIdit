@@ -38,7 +38,7 @@ def pred():
     parser.add_argument(
         "--model",
         type=str,
-        help="choose the model you would like to use (linear, xgb,lgb, cnn, rnn,tcn)",
+        help="choose the model you would like to use (linear, xgb,lgb, rnn,tcn)",
     )
     ## 输入模型的保存路进
     parser.add_argument(
