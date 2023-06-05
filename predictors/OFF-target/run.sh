@@ -1,7 +1,7 @@
 export CELL_LINE=K562
 export OUTPUT_DIR=./result
 export MODEL=mlp
-export FAST_FILE_PATH=./K562_sample.txt
+export FILE_PATH=./K562_sample.txt
 echo --------------------------------start_predicting--------------------------------
 echo "input path will be ./on-example.fasta"
 echo "$MODEL was chosen"
