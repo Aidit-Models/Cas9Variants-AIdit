@@ -3,7 +3,7 @@ from scipy.stats import spearmanr, pearsonr
 
 
 
-# 设置评判标准
+# metric 
 def correlation(y_true, y_pred):
     import pandas as pd
     y_true = y_true.reshape(y_true.shape[0])
@@ -12,7 +12,7 @@ def correlation(y_true, y_pred):
     pr = pd.Series(y_pred).corr(pd.Series(y_true), method='pearson')
     return sp, pr
 
-# 使用 focal loss 作为深度学习建模的 loss function
+# loss funciton
 def focal_loss(y_true,y_pred):
     alpha= .25
     gamma=2.
@@ -24,7 +24,7 @@ def focal_loss(y_true,y_pred):
     return loss
 
 
-# 建立模型训练过程中的评价指标
+# metric which used during training 
 """check spearman and pearson during trainning """
 def get_spearmanr(y_true, y_pred):  
     return tf.py_function(spearmanr, [y_true, y_pred], Tout = tf.float32)
