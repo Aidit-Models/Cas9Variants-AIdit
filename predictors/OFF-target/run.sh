@@ -3,7 +3,7 @@ export OUTPUT_DIR=./result
 export MODEL=mlp
 export FILE_PATH=./K562_sample.txt
 echo --------------------------------start_predicting--------------------------------
-echo "input path will be ./on-example.fasta"
+echo "input path will be $FILE_PATH"
 echo "$MODEL was chosen"
 echo "$CELL_LINE cellline was chosen"
 python3 predictor.py\
