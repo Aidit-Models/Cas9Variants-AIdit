@@ -1,9 +1,7 @@
-##
-
 export CELL_LINE=K562
 export OUTPUT_DIR=./result
 export MODEL=tcn
-export FAST_FILE_PATH=./on-example.fasta
+export FILE_PATH=./on-example.fasta
 echo --------------------------------start_predicting--------------------------------
 echo "input path will be ./on-example.fasta"
 echo "$MODEL was chosen"
