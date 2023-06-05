@@ -5,7 +5,7 @@ import warnings
 from sklearn.model_selection import train_test_split
 from metric_loss import *
 
-# 生成路径文件
+# check direction
 def mkdir(path):
     path = path.strip()
     path = path.rstrip("\\")
@@ -13,13 +13,13 @@ def mkdir(path):
     if not isExists:
         os.makedirs(path)
 
-# 将 one-hot 作为基本编码信息
+# use one-hot 
 def one_hot(input,one_hot_dict):
     data = list(map(lambda x:one_hot_dict[x], input))
     return np.array(data)
 
 def get_position(wt,ot):
-    ## 基于序列信息获得 mutation position
+    ## get mutation position
     position=[]
     for i in range(len(wt)):
         if wt[i] == ot[i]:
@@ -29,7 +29,7 @@ def get_position(wt,ot):
     return position
 
 
-# 用embedding 的编码方式来决定我们的输入
+# convert seq to number 
 def emb_number(input):
     """convert one sequence input to tokens(from 1 to 4)
     Args:
@@ -51,7 +51,7 @@ def emb_number(input):
         data.append(output_data)
     return np.array(data)
 
-# 通过数据创造一个一维的数据向量作为on-target输入
+# creat input 
 def creat_data_for_1d_input(token_type,dataframe):
     if token_type == 'embedding':
         dataprocess = emb_number
@@ -61,7 +61,7 @@ def creat_data_for_1d_input(token_type,dataframe):
     input = to_array(dataframe['input'])
     return input.reshape(out_shape)
 
-# 改变输入数据的类型
+# change input type
 def to_array(input):
     """convert  input from list to array(from 1 to 4)
     Args:
@@ -72,11 +72,11 @@ def to_array(input):
     """
     return np.array(input.to_list())
 
-# 将label数据转换成我们需要的shape
+# creat label 
 def creat_label (dataframe):
     return to_array(dataframe['off']).reshape(-1,1)
 
-# 获取使用 on-target indel 作为特征
+# get on-target indel
 def pred_on_target_indel (input,model_library,cellline):
     data = pd.DataFrame(input,columns=['sequence'])
     model_selection = f'{model_library}/{cellline}_best_model/rnn_best.h5'
@@ -85,15 +85,15 @@ def pred_on_target_indel (input,model_library,cellline):
     output = model.predict(embedding_1d_input)
     return output
 
-# off target 所有特征生成
+# get all off-target features
 def off_target_process(dataframe,model_library,cellline):
-    ## 预测on-target indel 作为特征之一
+    
     wt_list = list(set(dataframe['wt_63_seq']))
     ontarget_ = pred_on_target_indel(wt_list,model_library,cellline)
     ontarget = pd.DataFrame(wt_list)
     ontarget.columns = ['wt_63_seq']
     ontarget['on target indel'] = ontarget_
-    ## 将我们需要使用的序列信息，位置信息以及on-target indel 作为输入进行处理
+    
     joint_seq = []
     position = []
     on_target_indel = []
@@ -118,11 +118,11 @@ def off_target_process(dataframe,model_library,cellline):
     dataframe['joint_seq'] = joint_seq
     return dataframe
 
-# 创建一个专门给MLP模型的输入
+# create input for mlp model 
 def creat_off_input_for_mlp(dataframe):
     return [to_array(dataframe['joint_seq']),to_array(dataframe['position']),to_array(dataframe['on_target_indel'])]
 
-# 创建一个专门给机器学习使用的输入
+# create input for other machine learning
 def creat_off_input_for_ml(dataframe):
     train_input_1 = np.array(dataframe['joint_seq'].to_list()).reshape(-1,46*4)
     train_input_2 = np.array(dataframe['position'].to_list()).reshape(-1,23)
