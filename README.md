@@ -13,7 +13,6 @@
     export MODEL=tcn
     export FILE_PATH=./on-example.fasta
     echo --------------------------------start_predicting--------------------------------
-    echo "input path will be $FILE_PATH"
     echo "$MODEL was chosen"
     echo "$CELL_LINE cellline was chosen"
     python3 predictor.py\
@@ -22,7 +21,6 @@
         --model $MODEL\
         --output_dir $OUTPUT_DIR 
     echo --------------------------------finish_predicting--------------------------------
-    echo "output file will be $OUTPUT_DIR"
 
 parameter:  
 CELL_LINE: choose cell line (K562 or Jurkat)  
@@ -46,7 +44,6 @@ FILE_PATH: fasta file used for prediction
     export MODEL=mlp
     export FILE_PATH=./K562_sample.txt
     echo --------------------------------start_predicting--------------------------------
-    echo "input path will be $FILE_PATH"
     echo "$MODEL was chosen"
     echo "$CELL_LINE cellline was chosen"
     python3 predictor.py\
@@ -55,7 +52,6 @@ FILE_PATH: fasta file used for prediction
         --model $MODEL\
         --output_dir $OUTPUT_DIR 
     echo --------------------------------finish_predicting--------------------------------
-    echo "output file will be $OUTPUT_DIR"
 
 parameter:  
 CELL_LINE: choose cell line (K562 or Jurkat)  
