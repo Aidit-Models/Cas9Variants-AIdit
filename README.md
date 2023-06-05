@@ -16,4 +16,4 @@
 
 ## Step two 
 
-    bash run.shs
+    bash run.sh
