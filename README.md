@@ -26,7 +26,7 @@
 
 parameter:  
 CELL_LINE: choose cellline (K562 or Jurkat)  
-OUTPUT_DIR: output
+OUTPUT_DIR: output  
 FILE_PATH: fasta file used for prediction  
 
 ## Step three 
@@ -59,7 +59,7 @@ FILE_PATH: fasta file used for prediction
 
 parameter:  
 CELL_LINE: choose cellline (K562 or Jurkat)  
-OUTPUT_DIR: output
+OUTPUT_DIR: output  
 FILE_PATH: txt file used for prediction  
 
 ## Step three
