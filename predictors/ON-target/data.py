@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd 
 
 
-# 用 one-hot 的编码方式来决定我们的输入
+# use one-hot
 def one_hot(input):
     """ convert one sequence input to one-hot style
     Args:
@@ -25,7 +25,7 @@ def one_hot(input):
         data.append(output_data)
     return np.array(data)
 
-# 用embedding 的编码方式来决定我们的输入
+# use embedding 
 def emb_number(input):
     """convert one sequence input to tokens(from 1 to 4)
     Args:
@@ -47,7 +47,7 @@ def emb_number(input):
         data.append(output_data)
     return np.array(data)
 
-# 改变输入数据的类型
+# change input type 
 def to_array(input):
     """convert  input from list to array(from 1 to 4)
     Args:
@@ -58,7 +58,7 @@ def to_array(input):
     """
     return np.array(input.to_list())
 
-# 通过输入的序列信息或者文件信息找到所有可以作为输入的 63bp 的输入
+# find all 63bp sequences which have NGG PAM
 def find_all(input,file=True):
     sequence = []
     if file:
@@ -79,7 +79,7 @@ def find_all(input,file=True):
                     seq = [s[pos-40:pos+23] for pos in positions if pos >=40 and pos+23 <= len(s)]
                     sequence = sequence + seq 
         else:
-            print('不支持该文件格式')
+            print('change file type ')
     else:
         s = input
         pattern = 'GG'
@@ -88,7 +88,7 @@ def find_all(input,file=True):
         sequence = sequence + seq
     return sequence
 
-# 通过数据创造一个一维的数据向量作为on-target输入
+# create input 
 def creat_data_for_1d_input(token_type,dataframe):
     if token_type == 'embedding':
         dataprocess = emb_number
@@ -101,7 +101,7 @@ def creat_data_for_1d_input(token_type,dataframe):
     input = to_array(dataframe['input'])
     return input.reshape(out_shape)
 
-# 通过数据创造一个二维的数据向量作为on-target输入
+# creat input 
 def creat_data_for_2d_input(token_type,dataframe):
     if token_type == 'embedding':
         dataprocess = emb_number
