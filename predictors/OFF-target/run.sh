@@ -8,7 +8,7 @@ echo "$MODEL was chosen"
 echo "$CELL_LINE cellline was chosen"
 python3 predictor.py\
     --cellline $CELL_LINE\
-    --input $FAST_FILE_PATH\
+    --input $FILE_PATH\
     --model $MODEL\
     --output_dir $OUTPUT_DIR 
 echo --------------------------------finish_predicting--------------------------------
