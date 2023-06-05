@@ -25,7 +25,7 @@
     echo "output file will be $OUTPUT_DIR"
 
 parameter:  
-CELL_LINE: choose cellline (K562 or Jurkat)  
+CELL_LINE: choose cell line (K562 or Jurkat)  
 OUTPUT_DIR: output  
 FILE_PATH: fasta file used for prediction  
 
@@ -58,7 +58,7 @@ FILE_PATH: fasta file used for prediction
     echo "output file will be $OUTPUT_DIR"
 
 parameter:  
-CELL_LINE: choose cellline (K562 or Jurkat)  
+CELL_LINE: choose cell line (K562 or Jurkat)  
 OUTPUT_DIR: output  
 FILE_PATH: txt file used for prediction  
 
